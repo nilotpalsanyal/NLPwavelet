@@ -1,0 +1,5 @@
+useDynLib(NLPwavelet, .registration=TRUE)
+importFrom(Rcpp, evalCpp)
+importFrom("stats", "mad", "median", "nlminb", "pgamma")
+import(wavethresh)
+export("BNLPWA")
