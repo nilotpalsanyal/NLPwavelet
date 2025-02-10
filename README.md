@@ -1,9 +1,9 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-<img src="man/figures/logo.png" align="right" style="float:right; height:140px;" />
+<img src="man/figures/logo.png" align="right" style="float:right; height:120px;" />
 
-# NLPwavelet
+# NLPwavelet: Bayesian Non-Local Prior-Based Wavelet Analysis
 
 <!-- badges: start -->
 
@@ -12,6 +12,8 @@ status](https://www.r-pkg.org/badges/version/NLPwavelet)](https://CRAN.R-project
 [![R-CMD-check](https://github.com/nilotpalsanyal/NLPwavelet/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/nilotpalsanyal/NLPwavelet/actions/workflows/R-CMD-check.yaml)
 [![CodeFactor](https://www.codefactor.io/repository/github/nilotpalsanyal/NLPwavelet/badge)](https://www.codefactor.io/repository/github/nilotpalsanyal/NLPwavelet)
 [![](http://cranlogs.r-pkg.org/badges/grand-total/NLPwavelet)](https://cran.r-project.org/package=NLPwavelet)
+[![BioC
+status](http://www.bioconductor.org/shields/build/release/bioc/NLPwavelet.svg)](https://bioconductor.org/checkResults/release/bioc-LATEST/NLPwavelet)
 <!-- badges: end -->
 
 performs Bayesian wavelet analysis using individual non-local priors as
