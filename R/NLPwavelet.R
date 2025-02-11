@@ -252,7 +252,7 @@ BNLPWA <- function(data, func=NULL, method=c("mixture","mom","imom"), mixprob_di
 
   #........ Posterior mean of the wavelet coef .......
 
-  dlj.post.mean <- c()
+  dlj.post.mean <- NULL
   for(l in 0:(log2(n)-1))
   for(j in 1:(2^l))
   {
@@ -262,7 +262,7 @@ BNLPWA <- function(data, func=NULL, method=c("mixture","mom","imom"), mixprob_di
 
   #............ Posterior smoothed function ...........
   
-  dlj.post.mean1 <- c()
+  dlj.post.mean1 <- NULL
   for(l in 0:(log2(n)-1))
     dlj.post.mean1 <- c( dlj.post.mean[(2^l):(2^(l+1)-1)], dlj.post.mean1 )
   data.wavelet.post <- wave_obj$obj
@@ -287,7 +287,7 @@ wavelet_trans <- function(data,filter.number=6,wave.family="DaubLeAsymm",bc="per
   n <- length(data)
   data.wavelet <- wd(data, filter.number, wave.family, "wavelet", bc)
 
-  dlj <- c()
+  dlj <- NULL
   for(l in 0:(log2(n)-1))
     dlj <- c( dlj , accessD(data.wavelet, level=l) )
 
@@ -449,7 +449,7 @@ wavelet_trans <- function(data,filter.number=6,wave.family="DaubLeAsymm",bc="per
 
 dlj_postmean_mixture_func <- function(n,r,nu,sigmasq,l,j,dlj,hyperparam,gamma1.l_func,gamma2.l_func,tau1.l_func,tau2.l_func)
 {
-  postmean <- c()
+  postmean <- NULL
   d <- dlj[(2^l-1)+j]
 
   if((l==0)||(l==1)||(l==2)) postmean = d else
@@ -489,7 +489,7 @@ dlj_postmean_mixture_func <- function(n,r,nu,sigmasq,l,j,dlj,hyperparam,gamma1.l
 
 dlj_postmean_indiv_func <- function(n,r,nu,sigmasq,l,j,dlj,hyperparam,gamma.l_func,tau.l_func,method)
 {
-  postmean <- c()
+  postmean <- NULL
   d <- dlj[(2^l-1)+j]
 
   if((l==0)||(l==1)||(l==2)) postmean = d else

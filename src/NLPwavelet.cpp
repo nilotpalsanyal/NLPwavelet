@@ -219,8 +219,7 @@ double lhood_contrib_indiv(std::string method, double d, double r,
                                 double gamma_l, double tau_l, double sigmasq, 
                                 double M1 = 1, 
                                 Rcpp::Nullable<double> d_star = R_NilValue, 
-                                Rcpp::Nullable<double> sigma_star = R_NilValue) {
-    
+                                Rcpp::Nullable<double> sigma_star = R_NilValue) {    
     double out;
     double lower_bound = -745; // Prevent underflow in exponentiation
 

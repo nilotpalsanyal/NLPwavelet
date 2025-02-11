@@ -12,8 +12,7 @@ status](https://www.r-pkg.org/badges/version/NLPwavelet)](https://CRAN.R-project
 [![R-CMD-check](https://github.com/nilotpalsanyal/NLPwavelet/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/nilotpalsanyal/NLPwavelet/actions/workflows/R-CMD-check.yaml)
 [![CodeFactor](https://www.codefactor.io/repository/github/nilotpalsanyal/NLPwavelet/badge)](https://www.codefactor.io/repository/github/nilotpalsanyal/NLPwavelet)
 [![](http://cranlogs.r-pkg.org/badges/grand-total/NLPwavelet)](https://cran.r-project.org/package=NLPwavelet)
-[![BioC
-status](http://www.bioconductor.org/shields/build/release/bioc/NLPwavelet.svg)](https://bioconductor.org/checkResults/release/bioc-LATEST/NLPwavelet)
+<!-- [![BioC status](http://www.bioconductor.org/shields/build/release/bioc/NLPwavelet.svg)](https://bioconductor.org/checkResults/release/bioc-LATEST/NLPwavelet) -->
 <!-- badges: end -->
 
 performs Bayesian wavelet analysis using individual non-local priors as
@@ -105,7 +104,7 @@ lines(fit_mixture$func.post.mean,col="blue") # plot of posterior
 ``` r
 # smoothed estimates
 fit_mixture$MSE.mean
-#> [1] 0.00634897
+#> [1] 0.006335836
 
 # Compare with other wavelet methods
 library(wavethresh)

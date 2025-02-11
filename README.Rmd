@@ -22,7 +22,7 @@ knitr::opts_chunk$set(
 [![R-CMD-check](https://github.com/nilotpalsanyal/NLPwavelet/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/nilotpalsanyal/NLPwavelet/actions/workflows/R-CMD-check.yaml)
 [![CodeFactor](https://www.codefactor.io/repository/github/nilotpalsanyal/NLPwavelet/badge)](https://www.codefactor.io/repository/github/nilotpalsanyal/NLPwavelet)
 [![](http://cranlogs.r-pkg.org/badges/grand-total/NLPwavelet)](https://cran.r-project.org/package=NLPwavelet)
-[![BioC status](http://www.bioconductor.org/shields/build/release/bioc/NLPwavelet.svg)](https://bioconductor.org/checkResults/release/bioc-LATEST/NLPwavelet)
+<!-- [![BioC status](http://www.bioconductor.org/shields/build/release/bioc/NLPwavelet.svg)](https://bioconductor.org/checkResults/release/bioc-LATEST/NLPwavelet) -->
 <!-- badges: end -->
 
 \pkg{NLPwavelet} performs Bayesian wavelet analysis using individual non-local priors as described in Sanyal & Ferreira ([2017](#ref-paper)) and non-local prior mixtures as described in Sanyal ([2025](#ref-paper1)).
