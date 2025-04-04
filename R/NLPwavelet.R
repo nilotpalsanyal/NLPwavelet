@@ -510,7 +510,7 @@ dlj_postmean_indiv_func <- function(n,r,nu,sigmasq,l,j,dlj,hyperparam,gamma.l_fu
       LA <- Lap_approx(d,nu,tau.l,sigmasq)
       d.star <- LA$d.max
       sigma.star <- LA$sigma.d.max
-      O_lj <- post_odds_func_indiv(method,d,r,sigmasq,gamma.l,tau.l,M1=NA,d.star,sigma.star)
+      O_lj <- post_odds_func_indiv(method,d,r,sigmasq,gamma.l,tau.l,NA,d.star,sigma.star)
       # O_lj <- gamma.l/(1-gamma.l) * (tau.l*sigmasq)^(r/2) * (gamma(r/2))^(-1) * sqrt(2*pi) * sigma.star * h_func(d.star,d,r,tau.l,sigmasq)
       if(O_lj==Inf) p_lj <- 1  else p_lj <- O_lj/(1+O_lj)      
       aux <- p_lj * d.star 

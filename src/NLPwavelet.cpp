@@ -235,7 +235,8 @@ double lhood_contrib_indiv(std::string method, double d, double r,
         double sigma_s = Rcpp::as<double>(sigma_star);
 
         // Assuming h_func is another Rcpp function
-        double h_val = Rcpp::as<double>(Rcpp::Function("h_func")(d_s, d, r, tau_l, sigmasq));
+        // double h_val = Rcpp::as<double>(Rcpp::Function("h_func")(d_s, d, r, tau_l, sigmasq));
+        double h_val = h_func(d_s, d, r, tau_l, sigmasq);
 
         out = log( exp(std::max(lower_bound, log(gamma_l) + (r / 2) * log(tau_l * sigmasq) - 
                               log(R::gammafn(r / 2)) - d * d / (2 * sigmasq) + 

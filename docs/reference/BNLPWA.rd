@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">NLPwavelet</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.1</span>
       </span>
     </div>
 
@@ -234,8 +234,7 @@
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span> <span class="co"># \dontrun{</span></span></span>
-<span class="r-in"><span>  <span class="co"># Using the well-known Doppler function to </span></span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span>  <span class="co"># Using the well-known Doppler function to </span></span></span>
 <span class="r-in"><span>  <span class="co"># illustrate the use of the function BNLPWA</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span>  <span class="co"># set seed for reproducibility</span></span></span>
@@ -246,8 +245,8 @@
 <span class="r-in"><span>    <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html" class="external-link">sqrt</a></span><span class="op">(</span><span class="va">x</span> <span class="op">*</span> <span class="op">(</span><span class="fl">1</span> <span class="op">-</span> <span class="va">x</span><span class="op">)</span><span class="op">)</span> <span class="op">*</span> <span class="fu"><a href="https://rdrr.io/r/base/Trig.html" class="external-link">sin</a></span><span class="op">(</span><span class="op">(</span><span class="fl">2</span> <span class="op">*</span> <span class="va">pi</span> <span class="op">*</span> <span class="fl">1.05</span><span class="op">)</span> <span class="op">/</span> <span class="op">(</span><span class="va">x</span> <span class="op">+</span> <span class="fl">0.05</span><span class="op">)</span><span class="op">)</span> </span></span>
 <span class="r-in"><span>  <span class="op">}</span></span></span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span>  <span class="co"># Generate true values over a grid</span></span></span>
-<span class="r-in"><span>  <span class="va">n</span> <span class="op">&lt;-</span> <span class="fl">512</span>  <span class="co"># Number of points</span></span></span>
+<span class="r-in"><span>  <span class="co"># Generate true values over a grid of length an integer power of 2 </span></span></span>
+<span class="r-in"><span>  <span class="va">n</span> <span class="op">&lt;-</span> <span class="fl">128</span>  <span class="co"># Number of points</span></span></span>
 <span class="r-in"><span>  <span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">1</span>, length.out <span class="op">=</span> <span class="va">n</span><span class="op">)</span></span></span>
 <span class="r-in"><span>  <span class="va">true_signal</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/wavethresh/man/doppler.html" class="external-link">doppler</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span> </span></span>
 <span class="r-in"><span></span></span>
@@ -264,64 +263,81 @@
 <span class="r-in"><span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">y</span>,type<span class="op">=</span><span class="st">"l"</span>,col<span class="op">=</span><span class="st">"grey"</span><span class="op">)</span> <span class="co"># plot of data</span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/r/graphics/lines.html" class="external-link">lines</a></span><span class="op">(</span><span class="va">fit_mom</span><span class="op">$</span><span class="va">func.post.mean</span>,col<span class="op">=</span><span class="st">"blue"</span><span class="op">)</span> <span class="co"># plot of posterior </span></span></span>
+<span class="r-plt img"><img src="BNLPWA-1.png" alt="" width="700" height="433"></span>
 <span class="r-in"><span>  <span class="co"># smoothed estimates</span></span></span>
 <span class="r-in"><span>  <span class="va">fit_mom</span><span class="op">$</span><span class="va">MSE.mean</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.01451165</span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span>  <span class="co"># BNLPWA analysis using non-local prior mixtures using generalized </span></span></span>
-<span class="r-in"><span>  <span class="co"># logit (Richard's) specification for the mixture probabilities and </span></span></span>
-<span class="r-in"><span>  <span class="co"># double exponential decay specification for the scale parameter</span></span></span>
-<span class="r-in"><span>  <span class="va">fit_mixture</span> <span class="op">&lt;-</span> <span class="fu">BNLPWA</span><span class="op">(</span>data<span class="op">=</span><span class="va">y</span>, func<span class="op">=</span><span class="va">true_signal</span>, r<span class="op">=</span><span class="fl">1</span>, nu<span class="op">=</span><span class="fl">1</span>, wave.family<span class="op">=</span></span></span>
-<span class="r-in"><span>    <span class="st">"DaubLeAsymm"</span>, filter.number<span class="op">=</span><span class="fl">6</span>, bc<span class="op">=</span><span class="st">"periodic"</span>, method<span class="op">=</span><span class="st">"mixture"</span>, </span></span>
-<span class="r-in"><span>    mixprob_dist<span class="op">=</span><span class="st">"genlogit"</span>, scale_dist<span class="op">=</span><span class="st">"doubleexp"</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="co"># \donttest{</span></span></span>
+<span class="r-in"><span>    <span class="co"># BNLPWA analysis using non-local prior mixtures using generalized </span></span></span>
+<span class="r-in"><span>    <span class="co"># logit (Richard's) specification for the mixture probabilities and </span></span></span>
+<span class="r-in"><span>    <span class="co"># double exponential decay specification for the scale parameter</span></span></span>
+<span class="r-in"><span>    <span class="va">fit_mixture</span> <span class="op">&lt;-</span> <span class="fu">BNLPWA</span><span class="op">(</span>data<span class="op">=</span><span class="va">y</span>, func<span class="op">=</span><span class="va">true_signal</span>, r<span class="op">=</span><span class="fl">1</span>, nu<span class="op">=</span><span class="fl">1</span>, wave.family<span class="op">=</span></span></span>
+<span class="r-in"><span>      <span class="st">"DaubLeAsymm"</span>, filter.number<span class="op">=</span><span class="fl">6</span>, bc<span class="op">=</span><span class="st">"periodic"</span>, method<span class="op">=</span><span class="st">"mixture"</span>, </span></span>
+<span class="r-in"><span>      mixprob_dist<span class="op">=</span><span class="st">"genlogit"</span>, scale_dist<span class="op">=</span><span class="st">"doubleexp"</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">y</span>,type<span class="op">=</span><span class="st">"l"</span>,col<span class="op">=</span><span class="st">"grey"</span><span class="op">)</span> <span class="co"># plot of data</span></span></span>
-<span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/r/graphics/lines.html" class="external-link">lines</a></span><span class="op">(</span><span class="va">fit_mixture</span><span class="op">$</span><span class="va">func.post.mean</span>,col<span class="op">=</span><span class="st">"blue"</span><span class="op">)</span> <span class="co"># plot of posterior </span></span></span>
-<span class="r-in"><span>  <span class="co"># smoothed estimates</span></span></span>
-<span class="r-in"><span>  <span class="va">fit_mixture</span><span class="op">$</span><span class="va">MSE.mean</span></span></span>
-<span class="r-in"><span></span></span>
+<span class="r-in"><span>    <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">y</span>,type<span class="op">=</span><span class="st">"l"</span>,col<span class="op">=</span><span class="st">"grey"</span><span class="op">)</span> <span class="co"># plot of data</span></span></span>
+<span class="r-in"><span>    <span class="fu"><a href="https://rdrr.io/r/graphics/lines.html" class="external-link">lines</a></span><span class="op">(</span><span class="va">fit_mixture</span><span class="op">$</span><span class="va">func.post.mean</span>,col<span class="op">=</span><span class="st">"blue"</span><span class="op">)</span> <span class="co"># plot of posterior </span></span></span>
+<span class="r-plt img"><img src="BNLPWA-2.png" alt="" width="700" height="433"></span>
+<span class="r-in"><span>    <span class="co"># smoothed estimates</span></span></span>
+<span class="r-in"><span>    <span class="va">fit_mixture</span><span class="op">$</span><span class="va">MSE.mean</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.01429571</span>
+<span class="r-in"><span>  <span class="co"># }</span></span></span>
+<span class="r-in"><span>  </span></span>
 <span class="r-in"><span>  <span class="co"># Compare with other wavelet methods</span></span></span>
 <span class="r-in"><span>  <span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">wavethresh</span><span class="op">)</span></span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Loading required package: MASS</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> WaveThresh: R wavelet software, release 4.7.2, installed</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Copyright Guy Nason and others 1993-2022</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Note: nlevels has been renamed to nlevelsWT</span>
 <span class="r-in"><span>  <span class="va">wd</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/wavethresh/man/wd.html" class="external-link">wd</a></span><span class="op">(</span><span class="va">y</span>, family<span class="op">=</span><span class="st">"DaubLeAsymm"</span>, filter.number<span class="op">=</span><span class="fl">6</span>, bc<span class="op">=</span><span class="st">"periodic"</span><span class="op">)</span>  <span class="co"># Wavelet decomposition  </span></span></span>
 <span class="r-in"><span>  </span></span>
 <span class="r-in"><span>  <span class="va">wd_thresh_universal</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/wavethresh/man/threshold.html" class="external-link">threshold</a></span><span class="op">(</span><span class="va">wd</span>, policy<span class="op">=</span><span class="st">"universal"</span>, type<span class="op">=</span><span class="st">"hard"</span><span class="op">)</span></span></span>
 <span class="r-in"><span>  <span class="va">fit_universal</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/wavethresh/man/wr.html" class="external-link">wr</a></span><span class="op">(</span><span class="va">wd_thresh_universal</span><span class="op">)</span></span></span>
 <span class="r-in"><span>  <span class="va">MSE_universal</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="op">(</span><span class="va">true_signal</span><span class="op">-</span><span class="va">fit_universal</span><span class="op">)</span><span class="op">^</span><span class="fl">2</span><span class="op">)</span></span></span>
 <span class="r-in"><span>  <span class="va">MSE_universal</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.0154515</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span>  <span class="va">wd_thresh_sure</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/wavethresh/man/threshold.html" class="external-link">threshold</a></span><span class="op">(</span><span class="va">wd</span>, policy<span class="op">=</span><span class="st">"sure"</span>, type<span class="op">=</span><span class="st">"soft"</span><span class="op">)</span></span></span>
 <span class="r-in"><span>  <span class="va">fit_sure</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/wavethresh/man/wr.html" class="external-link">wr</a></span><span class="op">(</span><span class="va">wd_thresh_sure</span><span class="op">)</span></span></span>
 <span class="r-in"><span>  <span class="va">MSE_sure</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="op">(</span><span class="va">true_signal</span><span class="op">-</span><span class="va">fit_sure</span><span class="op">)</span><span class="op">^</span><span class="fl">2</span><span class="op">)</span></span></span>
 <span class="r-in"><span>  <span class="va">MSE_sure</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.02724251</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span>  <span class="va">wd_thresh_BayesThresh</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/wavethresh/man/threshold.html" class="external-link">threshold</a></span><span class="op">(</span><span class="va">wd</span>, policy<span class="op">=</span><span class="st">"BayesThresh"</span>, type<span class="op">=</span><span class="st">"hard"</span><span class="op">)</span></span></span>
 <span class="r-in"><span>  <span class="va">fit_BayesThresh</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/wavethresh/man/wr.html" class="external-link">wr</a></span><span class="op">(</span><span class="va">wd_thresh_BayesThresh</span><span class="op">)</span></span></span>
 <span class="r-in"><span>  <span class="va">MSE_BayesThresh</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="op">(</span><span class="va">true_signal</span><span class="op">-</span><span class="va">fit_BayesThresh</span><span class="op">)</span><span class="op">^</span><span class="fl">2</span><span class="op">)</span></span></span>
 <span class="r-in"><span>  <span class="va">MSE_BayesThresh</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.009630035</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span>  <span class="va">wd_thresh_cv</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/wavethresh/man/threshold.html" class="external-link">threshold</a></span><span class="op">(</span><span class="va">wd</span>, policy<span class="op">=</span><span class="st">"cv"</span>, type<span class="op">=</span><span class="st">"hard"</span><span class="op">)</span></span></span>
 <span class="r-in"><span>  <span class="va">fit_cv</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/wavethresh/man/wr.html" class="external-link">wr</a></span><span class="op">(</span><span class="va">wd_thresh_cv</span><span class="op">)</span></span></span>
 <span class="r-in"><span>  <span class="va">MSE_cv</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="op">(</span><span class="va">true_signal</span><span class="op">-</span><span class="va">fit_cv</span><span class="op">)</span><span class="op">^</span><span class="fl">2</span><span class="op">)</span></span></span>
 <span class="r-in"><span>  <span class="va">MSE_cv</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.0154515</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span>  <span class="va">wd_thresh_fdr</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/wavethresh/man/threshold.html" class="external-link">threshold</a></span><span class="op">(</span><span class="va">wd</span>, policy<span class="op">=</span><span class="st">"fdr"</span>, type<span class="op">=</span><span class="st">"hard"</span><span class="op">)</span></span></span>
 <span class="r-in"><span>  <span class="va">fit_fdr</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/wavethresh/man/wr.html" class="external-link">wr</a></span><span class="op">(</span><span class="va">wd_thresh_fdr</span><span class="op">)</span></span></span>
 <span class="r-in"><span>  <span class="va">MSE_fdr</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="op">(</span><span class="va">true_signal</span><span class="op">-</span><span class="va">fit_fdr</span><span class="op">)</span><span class="op">^</span><span class="fl">2</span><span class="op">)</span></span></span>
 <span class="r-in"><span>  <span class="va">MSE_fdr</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.01385581</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span>  <span class="co"># Compare with non-wavelet methods</span></span></span>
 <span class="r-in"><span>      <span class="co"># Kernel smoothing</span></span></span>
 <span class="r-in"><span>  <span class="va">fit_ksmooth</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/ksmooth.html" class="external-link">ksmooth</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span>, kernel<span class="op">=</span><span class="st">"normal"</span>, bandwidth<span class="op">=</span><span class="fl">0.05</span><span class="op">)</span></span></span>
 <span class="r-in"><span>  <span class="va">MSE_ksmooth</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="op">(</span><span class="va">true_signal</span><span class="op">-</span><span class="va">fit_ksmooth</span><span class="op">$</span><span class="va">y</span><span class="op">)</span><span class="op">^</span><span class="fl">2</span><span class="op">)</span></span></span>
 <span class="r-in"><span>  <span class="va">MSE_ksmooth</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.01720812</span>
 <span class="r-in"><span>      <span class="co"># LOESS smoothing</span></span></span>
 <span class="r-in"><span>  <span class="va">fit_loess</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/loess.html" class="external-link">loess</a></span><span class="op">(</span><span class="va">y</span> <span class="op">~</span> <span class="va">x</span>, span<span class="op">=</span><span class="fl">0.1</span><span class="op">)</span>  <span class="co"># Adjust span for more or less smoothing</span></span></span>
 <span class="r-in"><span>  <span class="va">MSE_loess</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="op">(</span><span class="va">true_signal</span><span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/stats/predict.html" class="external-link">predict</a></span><span class="op">(</span><span class="va">fit_loess</span><span class="op">)</span><span class="op">)</span><span class="op">^</span><span class="fl">2</span><span class="op">)</span></span></span>
 <span class="r-in"><span>  <span class="va">MSE_loess</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.01596312</span>
 <span class="r-in"><span>      <span class="co"># Cubic spline smoothing</span></span></span>
 <span class="r-in"><span>  <span class="va">spline_fit</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/smooth.spline.html" class="external-link">smooth.spline</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span>, spar<span class="op">=</span><span class="fl">0.5</span><span class="op">)</span>  <span class="co"># Adjust spar for smoothness</span></span></span>
 <span class="r-in"><span>  <span class="va">MSE_spline</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="op">(</span><span class="va">true_signal</span><span class="op">-</span><span class="va">spline_fit</span><span class="op">$</span><span class="va">y</span><span class="op">)</span><span class="op">^</span><span class="fl">2</span><span class="op">)</span></span></span>
 <span class="r-in"><span>  <span class="va">MSE_spline</span></span></span>
-<span class="r-in"><span><span class="op">}</span> <span class="co"># }</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.01855072</span>
 </code></pre></div>
     </div>
   </div>

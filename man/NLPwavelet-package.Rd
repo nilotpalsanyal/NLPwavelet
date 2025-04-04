@@ -11,7 +11,7 @@
 }
 
 \description{
-  Package \pkg{NLPwavelet} performs Bayesian wavelet analysis using individual non-local priors as described in Sanyal & Ferreira (2017) <DOI:10.1007/s13571-016-0129-3> and non-local prior mixtures as described in Sanyal (2025) <DOI:10.48550/arXiv.2501.18134>.
+  Performs Bayesian wavelet analysis using individual non-local priors as described in Sanyal & Ferreira (2017) <DOI:10.1007/s13571-016-0129-3> and non-local prior mixtures as described in Sanyal (2025) <DOI:10.48550/arXiv.2501.18134>.
 }
 
 \details{

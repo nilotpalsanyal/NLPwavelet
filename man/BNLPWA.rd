@@ -186,7 +186,6 @@ BNLPWA(
 Maintainer: Nilotpal Sanyal <nsanyal@utep.edu>
 }
 \examples{
-\dontrun{
   # Using the well-known Doppler function to 
   # illustrate the use of the function BNLPWA
 
@@ -198,8 +197,8 @@ Maintainer: Nilotpal Sanyal <nsanyal@utep.edu>
     sqrt(x * (1 - x)) * sin((2 * pi * 1.05) / (x + 0.05)) 
   }
 
-  # Generate true values over a grid
-  n <- 512  # Number of points
+  # Generate true values over a grid of length an integer power of 2 
+  n <- 128  # Number of points
   x <- seq(0, 1, length.out = n)
   true_signal <- doppler(x) 
 
@@ -219,18 +218,20 @@ Maintainer: Nilotpal Sanyal <nsanyal@utep.edu>
   # smoothed estimates
   fit_mom$MSE.mean
 
-  # BNLPWA analysis using non-local prior mixtures using generalized 
-  # logit (Richard's) specification for the mixture probabilities and 
-  # double exponential decay specification for the scale parameter
-  fit_mixture <- BNLPWA(data=y, func=true_signal, r=1, nu=1, wave.family=
-    "DaubLeAsymm", filter.number=6, bc="periodic", method="mixture", 
-    mixprob_dist="genlogit", scale_dist="doubleexp")
+  \donttest{
+    # BNLPWA analysis using non-local prior mixtures using generalized 
+    # logit (Richard's) specification for the mixture probabilities and 
+    # double exponential decay specification for the scale parameter
+    fit_mixture <- BNLPWA(data=y, func=true_signal, r=1, nu=1, wave.family=
+      "DaubLeAsymm", filter.number=6, bc="periodic", method="mixture", 
+      mixprob_dist="genlogit", scale_dist="doubleexp")
 
-  plot(y,type="l",col="grey") # plot of data
-  lines(fit_mixture$func.post.mean,col="blue") # plot of posterior 
-  # smoothed estimates
-  fit_mixture$MSE.mean
-
+    plot(y,type="l",col="grey") # plot of data
+    lines(fit_mixture$func.post.mean,col="blue") # plot of posterior 
+    # smoothed estimates
+    fit_mixture$MSE.mean
+  }
+  
   # Compare with other wavelet methods
   library(wavethresh)
   wd <- wd(y, family="DaubLeAsymm", filter.number=6, bc="periodic")  # Wavelet decomposition  
@@ -273,7 +274,6 @@ Maintainer: Nilotpal Sanyal <nsanyal@utep.edu>
   spline_fit <- smooth.spline(x, y, spar=0.5)  # Adjust spar for smoothness
   MSE_spline <- mean((true_signal-spline_fit$y)^2)
   MSE_spline
-}
 }
 
 
