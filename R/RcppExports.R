@@ -41,11 +41,11 @@ post_mixprobs_func <- function(post_odds) {
     .Call(`_NLPwavelet_post_mixprobs_func`, post_odds)
 }
 
-post_odds_func_indiv <- function(method, d, r, M1, sigmasq, gamma_l, tau_l, d_star = NULL, sigma_star = NULL) {
-    .Call(`_NLPwavelet_post_odds_func_indiv`, method, d, r, M1, sigmasq, gamma_l, tau_l, d_star, sigma_star)
+post_odds_func_indiv <- function(method, d, r, sigmasq, gamma_l, tau_l, M1 = 1, d_star = NULL, sigma_star = NULL) {
+    .Call(`_NLPwavelet_post_odds_func_indiv`, method, d, r, sigmasq, gamma_l, tau_l, M1, d_star, sigma_star)
 }
 
-lhood_contrib_indiv <- function(method, d, r, M1, gamma_l, tau_l, sigmasq, d_star = NULL, sigma_star = NULL) {
-    .Call(`_NLPwavelet_lhood_contrib_indiv`, method, d, r, M1, gamma_l, tau_l, sigmasq, d_star, sigma_star)
+lhood_contrib_indiv <- function(method, d, r, gamma_l, tau_l, sigmasq, M1 = 1, d_star = NULL, sigma_star = NULL) {
+    .Call(`_NLPwavelet_lhood_contrib_indiv`, method, d, r, gamma_l, tau_l, sigmasq, M1, d_star, sigma_star)
 }
 
