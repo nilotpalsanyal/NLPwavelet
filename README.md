@@ -15,7 +15,7 @@ status](https://www.r-pkg.org/badges/version/NLPwavelet)](https://CRAN.R-project
 <!-- [![BioC status](http://www.bioconductor.org/shields/build/release/bioc/NLPwavelet.svg)](https://bioconductor.org/checkResults/release/bioc-LATEST/NLPwavelet) -->
 <!-- badges: end -->
 
-performs Bayesian wavelet analysis using individual non-local priors as
+NLPwavelet performs Bayesian wavelet analysis using individual non-local priors as
 described in Sanyal & Ferreira ([2017](#ref-paper)) and non-local prior
 mixtures as described in Sanyal ([2025](#ref-paper1)).
 
